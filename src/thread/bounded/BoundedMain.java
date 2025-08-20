@@ -10,7 +10,7 @@ public class BoundedMain {
 
     public static void main(String[] args) {
         // 1. BoundedQueue 선택
-        BoundedQueue queue = new BoundedQueueV1(2);
+        BoundedQueue queue = new BoundedQueueV2(2);
 
         // 2. 생상자 소비자 실행 순서 선택, 반드시 하나만 선택하기
         producerFirst(queue);  // 생산자 먼저 실행
@@ -61,17 +61,7 @@ public class BoundedMain {
             // 생산자 Thread 시작
             producer.start();
             // 1번 2번 3번 순서 구분을 위해서 ( 로그 확인용 )
-        }
-    }
-
-    private static void printAllState(BoundedQueue queue, List<Thread> threads) {
-
-        System.out.println();
-
-        log("현재 상태 출력, 큐 데이터 : " + queue);
-
-        for (Thread thread : threads) {
-            log(thread.getName() + " : " + thread.getState());
+            sleep(100);
         }
     }
 
@@ -84,8 +74,22 @@ public class BoundedMain {
             Thread consumer = new Thread(new ConsumerTask(queue), "consumer" + i);
             threads.add(consumer);
             consumer.start();
+            sleep(100);
         }
     }
+
+
+    private static void printAllState(BoundedQueue queue, List<Thread> threads) {
+
+        System.out.println();
+
+        log("현재 상태 출력, 큐 데이터 : " + queue);
+
+        for (Thread thread : threads) {
+            log(thread.getName() + " : " + thread.getState());
+        }
+    }
+
 
 
 }
