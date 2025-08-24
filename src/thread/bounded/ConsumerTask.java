@@ -18,7 +18,5 @@ public class ConsumerTask implements Runnable {
         String data = queue.take();
 
         log("[소비 완료] " + data + " <- " + queue);
-
-
     }
 }
