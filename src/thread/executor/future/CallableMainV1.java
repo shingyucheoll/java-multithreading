@@ -1,23 +1,14 @@
 package thread.executor.future;
 
-import static util.MyLogger.*;
-import static util.ThreadUtils.*;
-
 import java.util.Random;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
+
+import static util.MyLogger.log;
+import static util.ThreadUtils.sleep;
 
 public class CallableMainV1 {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-
-
 
         ExecutorService es = Executors.newFixedThreadPool(1);
         Future<Integer> future = es.submit(new MyCallable());
@@ -26,7 +17,7 @@ public class CallableMainV1 {
         es.close();
 
         ExecutorService es1 = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS,
-            new LinkedBlockingQueue<>());
+                new LinkedBlockingQueue<>());
         Future<Integer> submit = es1.submit(new MyCallable());
 
         log("submit.get()" + submit.get());
