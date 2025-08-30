@@ -25,7 +25,7 @@ import static util.ThreadUtils.sleep;
  *
  * 따라서, CachedThreadPool 전략은 서버의 자원을 최대한 사용하지만 서버가 감당할 수 있는 임계점을 넘는 순간 시스템이 다운된다.
  */
-public class CachePoolMainV3 {
+public class CachedThreadPoolMain {
 
     public static void main(String[] args) {
 

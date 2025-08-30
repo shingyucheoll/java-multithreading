@@ -8,7 +8,7 @@ import static thread.executor.ExecutorUtils.printState;
 import static util.MyLogger.log;
 import static util.ThreadUtils.sleep;
 
-public class PoolSizeMainV1 {
+public class ThreadPoolExecutorMain {
 
     public static void main(String[] args) {
 
