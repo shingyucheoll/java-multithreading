@@ -1,9 +1,9 @@
 package thread.executor;
 
-import static util.MyLogger.*;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
+
+import static util.MyLogger.log;
 
 public abstract class ExecutorUtils {
 
@@ -19,9 +19,26 @@ public abstract class ExecutorUtils {
             int queuedTask = poolExecutor.getQueue().size();
             long completedTask = poolExecutor.getCompletedTaskCount();
             log("[pool = " + pool + ", active = " + active + ", queuedTask = " + queuedTask + ", "
-                + "completedTask = " + completedTask + "]");
+                    + "completedTask = " + completedTask + "]");
         } else {
             // 캐스팅이 불가능한 Executor 가 들어올 경우
+            log(executorService);
+        }
+    }
+
+    // task Name 추가
+    public static void printState(ExecutorService executorService, String taskName) {
+
+        if (executorService instanceof ThreadPoolExecutor poolExecutor) {
+
+            int pool = poolExecutor.getPoolSize();
+            int active = poolExecutor.getActiveCount();
+            int queuedTask = poolExecutor.getQueue().size();
+            long completedTask = poolExecutor.getCompletedTaskCount();
+
+            log(taskName + " -> [pool = " + pool + ", active = " + active + ", queuedTask = " + queuedTask + ", "
+                    + "completedTask = " + completedTask + "]");
+        } else {
             log(executorService);
         }
     }
